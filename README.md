@@ -35,14 +35,14 @@ Method: POST
 Description: Accepts a request to shorten a URL, optionally allowing a custom code.
 
 Request Body:
-```json
+```bash
 {
   "original_url": "string",  // The original URL to be shortened (required)
   "custom_code": "string"    // Customized the URL shorten output(optional)
 }
 ```
 Response:
-```json
+```bash
 {
   "short_url": "string",  // The generated shortened URL
   "expired_at": "time.Time" // shortened URL TTL
