@@ -2,8 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -27,18 +25,15 @@ func NewUrlHandler(urlService URLService) *URLHandler {
 
 // POST /api/url original_url, custom_code, duration -> short_code, duration
 func (h *URLHandler) CreateURL(c echo.Context) error {
-	fmt.Println("print start create url")
 	// extract data
 	var req model.CreateURLRequest
 	if err := c.Bind(&req); err != nil {
 		return echo.NewHTTPError(echo.ErrBadRequest.Code, err.Error())
 	}
-	log.Println("data extracted")
 	// validate data
 	if err := c.Validate(req); err != nil {
 		return echo.NewHTTPError(echo.ErrBadRequest.Code, err.Error())
 	}
-	log.Println("data verified")
 	//transfer to short_code
 	resp, err := h.urlService.CreateURL(c.Request().Context(), req)
 	if err != nil {
