@@ -18,5 +18,7 @@ migrate_up:
 migrate_down:
 	migrate -path="./database/migrate" -database=${databaseURL} drop -f
 
+up: postgresql redis install_migrate install_sqlc migrate_up
+	@echo "All services are up and migrations applied!"
 
-.PHONY: postgresql redis install_migrate install_sqlc migrate_up
+.PHONY: postgresql redis install_migrate install_sqlc migrate_up up
